@@ -1,8 +1,11 @@
+import board
 import time
 from adafruit_crickit import crickit
 from digitalio import DigitalInOut, Direction, Pull
- 
-ss = crickit.seesaw
+
+# Adjustment factors for motors at full speed
+RIGHT_SPEED = 1.0
+LEFT_SPEED = 0.9
 
 button_A = DigitalInOut(board.BUTTON_A)
 button_A.direction = Direction.INPUT
@@ -27,17 +30,17 @@ def set_left(speed):
 # set_right(1.0)
 # set_left(1.0)
 # while True:
-#     pass
+#    pass
  
 while True:
     if button_A.value:
         while True:
             # tack left
             set_left(0.25)
-            set_right(1.0)
+            set_right(RIGHT_SPEED)
             time.sleep(0.75)
          
             # tack right
-            set_left(1.0)
+            set_left(LEFT_SPEED)
             set_right(0.25)
             time.sleep(0.75)
